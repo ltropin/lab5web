@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backend'
+    'backend',
+    'fullurl'
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+MEDIA_URL = '/backend/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'backend/static')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

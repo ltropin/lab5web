@@ -1,0 +1,37 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Вход
+{% endblock %}
+
+{% block content %}
+    <div class='container d-flex align-content-center justify-content-center'>
+            <form method="POST">
+                {% csrf_token %}
+                <div class='p-4 display-4 text-center'>Вход</div>
+                
+                <div class='form-group'>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{ form.username.label }}</span>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                    <small class='form-text text-muted'>{{ form.username.help_text }}</small>
+                </div>
+
+                <div class='form-group'>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">{{ form.password.label }}</span>
+                        </div>
+                        {{ form.password }}
+                    </div>
+                    <small class='form-text text-muted'>{{ form.password.help_text }}</small>
+                </div>
+
+                <button type="submit" class='btn btn-outline-danger w-100' >Войти</button>
+            </form>
+    </div>
+
+{% endblock %}
