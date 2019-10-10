@@ -1,0 +1,51 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Добавить маршрут
+{% endblock %}
+
+{% block content %}
+    <div class='container d-flex justify-content-center'>
+            
+            <form method="POST" class='w-50' enctype="multipart/form-data">
+                {% csrf_token %}
+                {% include "layouts/messages.html" %}
+                <div class='p-4 display-4 text-center'>Добавить маршрут</div>
+                
+                <div class="md-form">
+                    {{form.code}}
+                    <label for="id_code">{{form.code.label}}</label>
+                </div>
+
+                <div class="md-form">
+                    {{form.start}}
+                    <label for="id_start">{{form.start.label}}</label>
+                </div>
+
+                
+                <div class="md-form">
+                    {{form.end}}
+                    <label for="id_end">{{form.end.label}}</label>
+                </div>
+
+                <div class="md-form">
+                    {{form.type_route}}
+                </div>
+
+                <div class="md-form">
+                    <div class="file-field">
+                        <div class="btn btn-primary btn-sm float-left">
+                            <span>{{form.map_city.label}}</span>
+                        {{form.map_city}}
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Выберите файл">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class='btn btn btn-mdb-color w-100' >Сохранить</button>
+            </form>
+    </div>
+
+{% endblock %}

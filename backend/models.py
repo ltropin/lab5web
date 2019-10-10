@@ -11,14 +11,14 @@ class Route(models.Model):
         (TRAM, 'Трамвай')
     ]
 
-    code = models.CharField(max_length=50)
+    code = models.CharField(max_length=50, unique=True)
     start = models.TimeField()
     end = models.TimeField()
     type_route = models.CharField(max_length=2, choices=TYPE_CHOICE, default=BUS)
     map_city = models.ImageField(default='maps/none.png', upload_to='maps', unique=True)
 
     def __str__(self):
-        return f"Code: {self.name}"
+        return self.code
 
 class Station(models.Model):
     name = models.CharField(max_length=100)
@@ -49,7 +49,7 @@ class Vehicle(models.Model):
 
 class Driver(models.Model):
     name = models.CharField(max_length=100)
-    vahicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     birth_date = models.DateField()
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=100)

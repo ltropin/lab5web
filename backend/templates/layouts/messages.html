@@ -1,0 +1,27 @@
+{% block messagesList %}
+
+{% if messages|length > 0 %}
+
+    <div class='container p-1'>
+        {% for msg in messages %}
+            {% if msg.tags == 'error' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{msg}}
+                </div>
+            {% else %}
+                <div class="alert alert-{{msg.tags}} alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{msg}}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endif %}
+
+{% endblock %}

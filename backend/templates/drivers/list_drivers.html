@@ -1,0 +1,55 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Список водителей
+{% endblock %}
+
+{% block content %}
+
+<div class='container d-flex justify-content-center flex-column'>
+    {% include "layouts/messages.html" %}
+    <div class='p-4 display-4 text-center'>
+        Список водителей <a class="btn btn-rounded btn-blue-grey" href='{{ fullurl }}/drivers/add/'>Добавить </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Телефон</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for driver in drivers %}
+        <tr>
+            <th scope="row"><h4>{{ driver.id }}</h4></th>
+            <td><h4>{{ driver.name }}</h4></td>
+            <td><h4>{{ driver.phone }}</h4></td>
+            <td><h4>{{ driver.email }}</h4></td>
+            <td>
+                <a href='{{ fullurl }}/drivers/edit/{{ driver.id }}/' >
+                    <button class='btn btn btn-dark-green btn-sm w-100'>Изменить</button>
+                </a>
+            </td>
+            <td>
+                <form method='POST' action="{{ fullurl }}/drivers/del/{{ driver.id }}/">
+                    {% csrf_token %}
+                    <button type="submit" class='btn btn btn-danger btn-sm w-100' >Удалить</button>
+                </form>
+            </td>
+            <td>
+                <a href='{{ fullurl }}/drivers/detail/{{ driver.id  }}/' >
+                    <button class='btn btn btn-indigo btn-sm w-100'>Просмотреть</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

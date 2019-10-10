@@ -1,0 +1,63 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Список маршрутов
+{% endblock %}
+
+{% block content %}
+
+<div class='container d-flex justify-content-center flex-column'>
+    {% include "layouts/messages.html" %}
+    <div class='p-4 display-4 text-center'>
+        Список маршрутов <a class="btn btn-rounded btn-blue-grey" href='{{ fullurl }}/routes/add/'>Добавить </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Код</th>
+            <th scope="col">Начало</th>
+            <th scope="col">Конец</th>
+            <th scope="col">Тип маршрута</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for route in routes %}
+        <tr>
+            <th scope="row">
+                <h4>
+                {% if route.code == 'null' %}
+                    -
+                {% else %}
+                {{route.code }}
+                {% endif %}
+                </h4>
+            </th>
+            <td><h4>{{ route.start|time:"H:i" }}</h4></td>
+            <td><h4>{{ route.end|time:"H:i" }}</h4></td>
+            <td><h4>{{ route.get_type_route_display }}</h4></td>
+            <td>
+                <a href='{{ fullurl }}/routes/edit/{{ route.id }}/' >
+                    <button class='btn btn btn-dark-green btn-sm w-100'>Изменить</button>
+                </a>
+            </td>
+            <td>
+                <form method='POST' action="{{ fullurl }}/routes/del/{{ route.id }}/">
+                    {% csrf_token %}
+                    <button type="submit" class='btn btn btn-danger btn-sm w-100' >Удалить</button>
+                </form>
+            </td>
+            <td>
+                <a href='{{ fullurl }}/routes/detail/{{ route.id  }}/' >
+                    <button class='btn btn btn-indigo btn-sm w-100'>Просмотреть</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

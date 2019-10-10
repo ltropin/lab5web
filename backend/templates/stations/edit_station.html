@@ -1,0 +1,35 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Изменить остановачный пункт
+{% endblock %}
+
+{% block content %}
+<div class='container d-flex justify-content-center'>
+            
+    <form method="POST" class='w-50' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include "layouts/messages.html" %}
+        <div class='p-4 display-4 text-center'>Изменить остановачный пункт</div>
+        
+        <div class="md-form">
+            {{form.name}}
+            <label for="id_code">{{form.code.label}}</label>
+        </div>
+
+        <div class="md-form">
+            {{form.position}}
+            <label for="id_start">{{form.start.label}}</label>
+        </div>
+
+        
+        <div class="md-form">
+            {{form.route}}
+        </div>
+
+        <button type="submit" class='btn btn btn-mdb-color w-100' >Сохранить</button>
+    </form>
+</div>
+
+
+{% endblock %}

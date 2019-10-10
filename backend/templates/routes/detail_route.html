@@ -1,0 +1,20 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Просмотр маршрута
+{% endblock %}
+
+{% block content %}
+    <div class='container d-flex justify-content-center flex-column align-items-center'>
+            
+        <div class='p-4 display-4 text-center'>Просмотр маршрута</div>
+
+        <img class='img-thumbnail' src='{{route.map_city.url}}' width='250px'>
+
+        <h4 class='pt-3'>Код: <b>{{route.code}}</b></h4>
+        <h4 class='pt-3'>Начало работы: <b>{{route.start|time:"H:i"}}</b></h4>
+        <h4 class='pt-3'>Конец работы: <b>{{route.end|time:"H:i"}}</b></h4>
+        <h4 class='pt-3'>Тип транспорта/маршрута: <b>{{route.get_type_route_display}}</b></h4>   
+    </div>
+
+{% endblock %}

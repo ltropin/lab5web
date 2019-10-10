@@ -1,0 +1,21 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Просмотр водителя
+{% endblock %}
+
+{% block content %}
+    <div class='container d-flex justify-content-center flex-column align-items-center'>
+            
+        <div class='p-4 display-4 text-center'>Просмотр водителя</div>
+
+        <img class='img-thumbnail' src='{{driver.avatar.url}}' width='250px'>
+
+        <h4 class='pt-3'>Имя: <b>{{driver.name}}</b></h4>
+        <h4 class='pt-3'>Транспорт: <b>{{driver.vehicle}}</b></h4>
+        <h4 class='pt-3'>Дата рождения: <b>{{driver.birth_date|date:"d.m.Y"}}</b></h4>
+        <h4 class='pt-3'>Email: <b>{{driver.email}}</b></h4>   
+        <h4 class='pt-3'>Телефон: <b>{{driver.phone}}</b></h4>       
+    </div>
+
+{% endblock %}

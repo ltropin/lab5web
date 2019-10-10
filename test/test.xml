@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<data>
+    <stations>
+        <station>
+            <name>253А</name>
+            <position>24, 55</position>
+        </station>
+        <station>
+            <name>1024</name>
+            <position>255, 13</position>
+        </station>
+    </stations>
+    <vehicles>
+        <vehicle>
+            <name>Car 1</name>
+            <capacity>25</capacity>
+            <type>SE</type>
+        </vehicle>
+        <vehicle>
+            <name>Car 2</name>
+            <capacity>35</capacity>
+            <type>SE</type>
+        </vehicle>
+    </vehicles>
+</data>

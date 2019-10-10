@@ -8,31 +8,98 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> {% endcomment %}
 </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container"><h5>Транс. сеть</h5></div>
-            <div class="container-fluid d-flex justify-content-end">
-                <a class="nav-link" href="/">Главная</a>
-                
-                {% if user.is_anonymous %}
-                    <a class="btn btn-outline-primary m-1" href="{{ fullurl }}/signin" role="button">Войти</a>
-                    <a class="btn btn-outline-danger m-1" href="{{ fullurl }}/signup" role="button">Регистрация</a>
-                {% else %}
-                    <a class="nav-link disabled" href="#">{{ user }}</a>
-                    {% if user.is_superuser %}
-                        <a class="btn btn-outline-primary m-1" href="{{ fullurl }}/admin" role="button">Админ панель</a>
-                    {% endif %}
-                    
-                    <a class="btn btn-outline-primary m-1" href="{{ fullurl }}/logout" role="button">Выйти</a>
+        
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark mdb-color">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Транспортная сеть</a>
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+        <!-- Left -->
+        {% if user.is_staff %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ fullurl }}/routes">Маршруты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ fullurl }}/drivers">Водители</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ fullurl }}/stations">Станции</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ fullurl }}/vehicles">Транспорт</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ fullurl }}/xml">XML</a>
+                </li>
+            </ul>
+        {% endif %}
+        <!-- Left -->
+        <!-- Right -->
+        <ul class="navbar-nav d-flex justify-content-end">
+            {% if user.is_anonymous %}
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-rounded btn-sm m-1" href="{{ fullurl }}/signin" role="button">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-danger btn-rounded btn-sm m-1" href="{{ fullurl }}/signup" role="button">Регистрация</a>
+                </li>
+            {% else %}
+                <li class="nav-item disabled">
+                    <a class="nav-link" href="#">{{ user }}</a>
+                </li>
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-rounded btn-sm m-1" href="{{ fullurl }}/admin" role="button">Админ панель</a>
+                </li>
                 {% endif %}
-            </div>
-        </nav>
+                <li class="nav-item">
+                    <a class="btn btn-danger btn-rounded btn-sm m-1" href="{{ fullurl }}/logout" role="button">Выйти</a>
+                </li>
+            {% endif %}
+        </ul>
+        <!-- Right -->
+    </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+
         {% block content %}
         {% endblock %}
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        {% comment %} Simple bootstrap 4 {% endcomment %}
+        {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> {% endcomment %}
+        
+        {% comment %} Material Design {% endcomment %}
+        <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+        <script type='text/javascript' src="{% static 'main.js' %}"></script>
+
     </body>
 </html>

@@ -1,0 +1,57 @@
+{% extends "layouts/main_layout.html" %}
+
+{% block title %}
+    Laba 5 - Список транспортных средств
+{% endblock %}
+
+{% block content %}
+
+<div class='container d-flex justify-content-center flex-column'>
+    {% include "layouts/messages.html" %}
+    <div class='p-4 display-4 text-center'>
+        Список транспортных средств <a class="btn btn-rounded btn-blue-grey" href='{{ fullurl }}/vehicles/add/'>Добавить </a>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Вместимость</th>
+            <th scope="col">Тим транспорта</th>
+            <th scope="col">Маршрут</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicle in vehicles %}
+        <tr>
+            <th scope="row"><h4>{{vehicle.name}}</h4></th>
+            <td><h4>{{ vehicle.capacity }}</h4></td>
+            <td><h4>{{ vehicle.get_type_vehicle_display }}</h4></td>
+            <td>
+                <h4>
+                {% if vehicle.route.code == 'null' %}
+                    -
+                {% else %}
+                     {{ vehicle.route }}
+                {% endif %}
+                </h4>
+            </td>
+            <td>
+                <a href='{{ fullurl }}/vehicles/edit/{{ vehicle.id }}/' >
+                    <button class='btn btn btn-dark-green btn-sm w-100'>Изменить</button>
+                </a>
+            </td>
+            <td>
+                <form method='POST' action="{{ fullurl }}/vehicles/del/{{ vehicle.id }}/">
+                    {% csrf_token %}
+                    <button type="submit" class='btn btn btn-danger btn-sm w-100' >Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
