@@ -5,7 +5,7 @@ from django.contrib import messages
 
 def add_route(request):
     if request.method == 'GET' and request.user.is_staff:
-        return render(request, 'add_route.html', context={'form': RouteForm()})
+        return render(request, 'routes/add_route.html', context={'form': RouteForm()})
     elif request.user.is_staff:
         form = RouteForm(data=request.POST, files=request.FILES)
 
@@ -14,7 +14,7 @@ def add_route(request):
             messages.info(request, 'Маршрут успешно добавлен!')
         else:
             messages.error(request, 'Ошибка при добавлении маршрута!')
-        return redirect('add_route')
+        return redirect('list_routes')
 
     messages.warning(request, 'У вас нет доступа к этой странице.')
     return redirect('list_routes')
